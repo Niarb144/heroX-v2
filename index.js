@@ -3,7 +3,7 @@ import axios from 'axios';
 import bodyParser from 'body-parser';
 
 const app = express();
-const port = 3000;
+const port = 4000;
 const API_URL = 'https://superheroapi.com/api/';
 const accessToken = '0044dc38f0e41632f600df5ed4b936b3';
 const config = {
