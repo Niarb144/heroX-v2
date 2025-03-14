@@ -44,6 +44,56 @@ app.get("/heroes", (req, res) => {
     res.render("heroes.ejs");
 })
 
+app.get("/versus", (req, res) => {
+    res.render("versus.ejs");
+})
+
+app.post("/findHeroA" , async(req, res) => {
+    let heroName = req.body.searchName;
+    console.log(`The hero is ${heroName}`);
+
+    try{
+        const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
+        const heroData = JSON.stringify(response.data);
+
+        const hero = JSON.parse(heroData);
+        const heroStuff = hero.results;
+        // const bio = heroStuff.biography;
+        // console.log(hero);
+        console.log(heroStuff);
+        // console.log(bio);
+
+        res.render("versus.ejs", {details: heroStuff});
+    }
+    catch(error){
+        console.log(`Hero not found`);
+        res.render("versus.ejs");
+    }    
+})
+
+app.post("/findHeroB" , async(req, res) => {
+    let heroName = req.body.searchName;
+    console.log(`The hero is ${heroName}`);
+
+    try{
+        const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
+        const heroData = JSON.stringify(response.data);
+
+        const hero = JSON.parse(heroData);
+        const heroStuff = hero.results;
+        // const bio = heroStuff.biography;
+        // console.log(hero);
+        console.log(heroStuff);
+        // console.log(bio);
+
+        res.render("versus.ejs", {details: heroStuff});
+    }
+    catch(error){
+        console.log(`Hero not found`);
+        res.render("versus.ejs");
+    }    
+})
+
 app.listen(port, () => {
     console.log(`Server running on port:${port}`);
 });
