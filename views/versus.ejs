@@ -37,6 +37,11 @@
                                     <li>Power: <%= detail.powerstats.power %></li>
                                     <li>Combat: <%= detail.powerstats.combat %></li>
                                 </ul>
+
+                                <p>Total Power =
+                                <% let sum = detail.powerstats.intelligence + detail.powerstats.strength %>
+                                </p>
+
                             </div>
                         </article>
                     </div>
@@ -81,6 +86,9 @@
                                     <li>Power: <%= detail.powerstats.power %></li>
                                     <li>Combat: <%= detail.powerstats.combat %></li>
                                 </ul>
+                                <p>Total Power = 
+                                    <% sum = detail.powerstats.intelligence + detail.powerstats.strength %>
+                                </p>
                             </div>
                         </article>
                     </div>
@@ -89,6 +97,10 @@
         <% } %>
     </div>
      
+</div>
+
+<div class="result_constainer">
+    
 </div>
 
 <%- include("partials/footer.ejs") %>

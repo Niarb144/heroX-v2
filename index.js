@@ -51,6 +51,9 @@ app.get("/heroes", (req, res) => {
 });
 
 app.get("/versus", (req, res) => {
+    console.log(req.session.detailsA);
+    console.log(req.session.detailsB)
+    
     res.render("versus.ejs", {
         detailsA: req.session.detailsA || null,
         detailsB: req.session.detailsB || null
@@ -62,6 +65,7 @@ app.post("/findHeroA", async (req, res) => {
     try {
         const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
         req.session.detailsA = response.data.results || null;
+        
     } catch {
         req.session.detailsA = null;
     }
