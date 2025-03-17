@@ -102,13 +102,9 @@
             <div class="card__container">
                 <article class="card__article">
                     <img src="<%= winner.image.url %>" alt="<%= winner.name %>" class="card__img">
-                    <div class="card__data">
-                        <span class="card__description"><%= winner.name %></span>
-                        <h4>'<%= winner.biography['full-name'] %>'</h4>
-                    </div>
-                </article>
+                 </article>
             </div>
-            <h2>Winner: <%= winner.name %></h2>
+            <h2 style="background: #fff; border-radius: 1rem; padding: 4px 8px;">Winner: <%= winner.name %>, <%= winner.biography['full-name'] %></h2>
         <% } %>
     </div>
 <% } %>
