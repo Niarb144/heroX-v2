@@ -1,0 +1,35 @@
+<% if (details.length) { %>
+    <div class="versus_container">
+        <% details.forEach((detail, index) => { %>
+            <div class="card__container">
+                <article class="card__article">
+                    <%= index + 1 %>
+                    <img src="<%= detail.image.url %>" alt="<%= detail.name %>" class="card__img">
+                    <div class="card__data">
+                        <span class="card__description"><%= detail.name %></span>
+                        <h4>'<%= detail.biography['full-name'] %>'</h4>
+                        <h2>Appearance</h2>
+                        <ul>
+                            <li>Gender: <%= detail.appearance.gender %></li>
+                            <li>Race: <%= detail.appearance.race %></li>
+                            <li>Height: <%= detail.appearance.height[0] %> / <%= detail.appearance.height[1] %></li>
+                        </ul>
+                        <h2>Powerstats</h2>
+                        <ul>
+                            <li>Intelligence: <%= detail.powerstats.intelligence %></li>
+                            <li>Strength: <%= detail.powerstats.strength %></li>
+                            <li>Speed: <%= detail.powerstats.speed %></li>
+                            <li>Durability: <%= detail.powerstats.durability %></li>
+                            <li>Power: <%= detail.powerstats.power %></li>
+                            <li>Combat: <%= detail.powerstats.combat %></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        <% }); %>
+    </div>
+<% } else { %>
+    <div class="notice">
+        <h2>Want to learn more about your favourite hero or villain. Well look no further.</h2>
+    </div>
+<% } %>

@@ -1,6 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import bodyParser from 'body-parser';
+import session from 'express-session';
 
 const app = express();
 const port = 4000;
@@ -12,6 +13,11 @@ const config = {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 app.get("/" ,(req, res) => {
     res.render("index.ejs");
@@ -42,57 +48,37 @@ app.post("/submit", async (req, res) => {
 
 app.get("/heroes", (req, res) => {
     res.render("heroes.ejs");
-})
+});
 
 app.get("/versus", (req, res) => {
-    res.render("versus.ejs");
-})
+    res.render("versus.ejs", {
+        detailsA: req.session.detailsA || null,
+        detailsB: req.session.detailsB || null
+    });
+});
 
-app.post("/findHeroA" , async(req, res) => {
-    let heroName = req.body.searchName;
-    console.log(`The hero is ${heroName}`);
-
-    try{
+app.post("/findHeroA", async (req, res) => {
+    const heroName = req.body.searchName;
+    try {
         const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
-        const heroData = JSON.stringify(response.data);
-
-        const hero = JSON.parse(heroData);
-        const heroStuff = hero.results;
-        // const bio = heroStuff.biography;
-        // console.log(hero);
-        console.log(heroStuff);
-        // console.log(bio);
-
-        res.render("versus.ejs", {details: heroStuff});
+        req.session.detailsA = response.data.results || null;
+    } catch {
+        req.session.detailsA = null;
     }
-    catch(error){
-        console.log(`Hero not found`);
-        res.render("versus.ejs");
-    }    
-})
+    res.redirect("/versus");
+});
 
-app.post("/findHeroB" , async(req, res) => {
-    let heroName = req.body.searchName;
-    console.log(`The hero is ${heroName}`);
-
-    try{
+app.post("/findHeroB", async (req, res) => {
+    const heroName = req.body.searchName;
+    try {
         const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
-        const heroData = JSON.stringify(response.data);
-
-        const hero = JSON.parse(heroData);
-        const heroStuff = hero.results;
-        // const bio = heroStuff.biography;
-        // console.log(hero);
-        console.log(heroStuff);
-        // console.log(bio);
-
-        res.render("versus.ejs", {details: heroStuff});
+        req.session.detailsB = response.data.results || null;
+    } catch {
+        req.session.detailsB = null;
     }
-    catch(error){
-        console.log(`Hero not found`);
-        res.render("versus.ejs");
-    }    
-})
+    res.redirect("/versus");
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port:${port}`);

@@ -150,6 +150,18 @@ img {
   text-decoration: underline;
 }
 
+.versus_container{
+  display: flex;
+  margin-top: 1rem;
+}
+
+.heroA{
+  background-color: hsla(253, 61%, 48%, 0.15);
+}
+
+.heroB{
+  background-color: hsla(2, 61%, 48%, 0.15);
+}
 /* Naming animations in hover */
 /* .card__article:hover .card__data {
   animation: show-data 1s forwards;

@@ -1,133 +1,94 @@
 <%- include("partials/header.ejs") %>
-<!-- Hero A -->
-<form class="d-flex input-group w-auto" action="/findHeroA" method="post">
-    <input
-      type="search"
-      class="form-control"
-      placeholder="Name"
-      name="searchName"
-      aria-label="Search"
-    />
-    <button
-      data-mdb-ripple-init
-      class="btn"
-      type="submit"
-      data-mdb-ripple-color="dark"
-    >
-      Search
-    </button>
-  </form>
+<style>
+   
+</style>
+<div class="versus_container">
+    <div class="heroA">
+        <!-- Hero A -->
+        <form class="d-flex input-group w-auto" action="/findHeroA" method="post">
+            <input type="search" class="form-control" placeholder="Name" name="searchName" aria-label="Search" required />
+            <button class="btn" type="submit" data-mdb-ripple-color="dark">Search</button>
+        </form>
 
-  <%if(locals.details){%>
-    <div class="body-container">
-        <% details.forEach((detail, index) => { %>
-            <div class="card__container">
-                <article class="card__article">
-                    <%= index + 1%>
-                    <img src="<%=detail.image.url%>" alt="<%=detail.name%>" class="card__img">
-                    <div class="card__data">
-                        <span class="card__description"><%=detail.name%></span>
-                        <h4>'<%=detail.biography['full-name']%>'</h4>
+        <% if (detailsA) { %>
+            <div class="body-container">
+                <% detailsA.forEach((detail, index) => { %>
+                    <div class="card__container">
+                        <article class="card__article">
+                            <%= index + 1 %>
+                            <img src="<%= detail.image.url %>" alt="<%= detail.name %>" class="card__img">
+                            <div class="card__data">
+                                <span class="card__description"><%= detail.name %></span>
+                                <h4>'<%= detail.biography['full-name'] %>'</h4>
 
-                        
                                 <h2>Appearance</h2>
-                        
                                 <ul>
-                                    <li>Gender: <%=detail.appearance.gender%></li>
-                                    <li>Race: <%=detail.appearance.race%></li>
-                                    <li>Height: <%=detail.appearance.height[0]%> / <%=detail.appearance.height[1]%></li>
+                                    <li>Gender: <%= detail.appearance.gender %></li>
+                                    <li>Race: <%= detail.appearance.race %></li>
+                                    <li>Height: <%= detail.appearance.height[0] %> / <%= detail.appearance.height[1] %></li>
                                 </ul>
-            
+
                                 <h2>Powerstats</h2>
-                                    <ul>
-                                        <li>Intelligence: <%=detail.powerstats.intelligence%></li>
-                                        <li>Strength: <%=detail.powerstats.strength%></li>
-                                        <li>Speed: <%=detail.powerstats.speed%></li>
-                                        <li>Durability: <%=detail.powerstats.durability%></li>
-                                        <li>Power: <%=detail.powerstats.power%></li>
-                                        <li>Combat: <%=detail.powerstats.combat%></li>
-                                    </ul>
-                            
+                                <ul>
+                                    <li>Intelligence: <%= detail.powerstats.intelligence %></li>
+                                    <li>Strength: <%= detail.powerstats.strength %></li>
+                                    <li>Speed: <%= detail.powerstats.speed %></li>
+                                    <li>Durability: <%= detail.powerstats.durability %></li>
+                                    <li>Power: <%= detail.powerstats.power %></li>
+                                    <li>Combat: <%= detail.powerstats.combat %></li>
+                                </ul>
+                            </div>
+                        </article>
                     </div>
-                </article>
-
-                
+                <% }); %>
             </div>
-        <%});%>
-        
-        
+        <% } %>
     </div>
-<%}else{%>
-    <div class="notice">
-        <h2>Want to learn more about your favourite hero or villain. Well look no further.</h2>
-    </div>
-    
-<%}%>  
 
-  <h1>VS</h1>
+    <h1>VS</h1>
 
-  <!-- Hero B -->
-  <form class="d-flex input-group w-auto" action="/findHeroB" method="post">
-    <input
-      type="search"
-      class="form-control"
-      placeholder="Name"
-      name="searchName"
-      aria-label="Search"
-    />
-    <button
-      data-mdb-ripple-init
-      class="btn"
-      type="submit"
-      data-mdb-ripple-color="dark"
-    >
-      Search
-    </button>
-  </form>
+    <div class="heroB">
+        <!-- Hero B -->
+        <form class="d-flex input-group w-auto" action="/findHeroB" method="post">
+            <input type="search" class="form-control" placeholder="Name" name="searchName" aria-label="Search" required />
+            <button class="btn" type="submit" data-mdb-ripple-color="dark">Search</button>
+        </form>
 
-  <%if(locals.details){%>
-    <div class="body-container">
-        <% details.forEach((detail, index) => { %>
-            <div class="card__container">
-                <article class="card__article">
-                    <%= index + 1%>
-                    <img src="<%=detail.image.url%>" alt="<%=detail.name%>" class="card__img">
-                    <div class="card__data">
-                        <span class="card__description"><%=detail.name%></span>
-                        <h4>'<%=detail.biography['full-name']%>'</h4>
+        <% if (detailsB) { %>
+            <div class="body-container">
+                <% detailsB.forEach((detail, index) => { %>
+                    <div class="card__container">
+                        <article class="card__article">
+                            <%= index + 1 %>
+                            <img src="<%= detail.image.url %>" alt="<%= detail.name %>" class="card__img">
+                            <div class="card__data">
+                                <span class="card__description"><%= detail.name %></span>
+                                <h4>'<%= detail.biography['full-name'] %>'</h4>
 
-                        
                                 <h2>Appearance</h2>
-                        
                                 <ul>
-                                    <li>Gender: <%=detail.appearance.gender%></li>
-                                    <li>Race: <%=detail.appearance.race%></li>
-                                    <li>Height: <%=detail.appearance.height[0]%> / <%=detail.appearance.height[1]%></li>
+                                    <li>Gender: <%= detail.appearance.gender %></li>
+                                    <li>Race: <%= detail.appearance.race %></li>
+                                    <li>Height: <%= detail.appearance.height[0] %> / <%= detail.appearance.height[1] %></li>
                                 </ul>
-            
-                                <h2>Powerstats</h2>
-                                    <ul>
-                                        <li>Intelligence: <%=detail.powerstats.intelligence%></li>
-                                        <li>Strength: <%=detail.powerstats.strength%></li>
-                                        <li>Speed: <%=detail.powerstats.speed%></li>
-                                        <li>Durability: <%=detail.powerstats.durability%></li>
-                                        <li>Power: <%=detail.powerstats.power%></li>
-                                        <li>Combat: <%=detail.powerstats.combat%></li>
-                                    </ul>
-                            
-                    </div>
-                </article>
 
-                
+                                <h2>Powerstats</h2>
+                                <ul>
+                                    <li>Intelligence: <%= detail.powerstats.intelligence %></li>
+                                    <li>Strength: <%= detail.powerstats.strength %></li>
+                                    <li>Speed: <%= detail.powerstats.speed %></li>
+                                    <li>Durability: <%= detail.powerstats.durability %></li>
+                                    <li>Power: <%= detail.powerstats.power %></li>
+                                    <li>Combat: <%= detail.powerstats.combat %></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                <% }); %>
             </div>
-        <%});%>
-        
-        
+        <% } %>
     </div>
-<%}else{%>
-    <div class="notice">
-        <h2>Want to learn more about your favourite hero or villain. Well look no further.</h2>
-    </div>
-    
-<%}%> 
+     
+</div>
+
 <%- include("partials/footer.ejs") %>
