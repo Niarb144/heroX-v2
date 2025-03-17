@@ -38,9 +38,6 @@
                                     <li>Combat: <%= detail.powerstats.combat %></li>
                                 </ul>
 
-                                <p>Total Power =
-                                <% let sum = detail.powerstats.intelligence + detail.powerstats.strength %>
-                                </p>
 
                             </div>
                         </article>
@@ -86,9 +83,7 @@
                                     <li>Power: <%= detail.powerstats.power %></li>
                                     <li>Combat: <%= detail.powerstats.combat %></li>
                                 </ul>
-                                <p>Total Power = 
-                                    <% sum = detail.powerstats.intelligence + detail.powerstats.strength %>
-                                </p>
+                                
                             </div>
                         </article>
                     </div>
@@ -99,8 +94,23 @@
      
 </div>
 
-<div class="result_constainer">
-    
-</div>
+<% if (winner) { %>
+    <div class="winner">
+        <% if (winner === 'Tie') { %>
+            <h2>It's a Tie!</h2>
+        <% } else { %>
+            <div class="card__container">
+                <article class="card__article">
+                    <img src="<%= winner.image.url %>" alt="<%= winner.name %>" class="card__img">
+                    <div class="card__data">
+                        <span class="card__description"><%= winner.name %></span>
+                        <h4>'<%= winner.biography['full-name'] %>'</h4>
+                    </div>
+                </article>
+            </div>
+            <h2>Winner: <%= winner.name %></h2>
+        <% } %>
+    </div>
+<% } %>
 
 <%- include("partials/footer.ejs") %>

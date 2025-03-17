@@ -50,37 +50,51 @@ app.get("/heroes", (req, res) => {
     res.render("heroes.ejs");
 });
 
+function calculatePowerstats(stats) {
+    return Object.values(stats).reduce((acc, val) => acc + (parseInt(val) || 0), 0);
+}
+
 app.get("/versus", (req, res) => {
-    console.log(req.session.detailsA);
-    console.log(req.session.detailsB)
-    
+    const { heroA, heroB } = req.session;
+    let winner = null;
+
+    if (heroA && heroB) {
+        const powerA = calculatePowerstats(heroA[0].powerstats);
+        const powerB = calculatePowerstats(heroB[0].powerstats);
+        winner = powerA > powerB ? heroA[0] : (powerA < powerB ? heroB[0] : 'Tie');
+    }
+
     res.render("versus.ejs", {
-        detailsA: req.session.detailsA || null,
-        detailsB: req.session.detailsB || null
+        detailsA: heroA || null,
+        detailsB: heroB || null,
+        winner
     });
 });
 
 app.post("/findHeroA", async (req, res) => {
     const heroName = req.body.searchName;
     try {
-        const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
-        req.session.detailsA = response.data.results || null;
-        
-    } catch {
-        req.session.detailsA = null;
+        const response = await axios.get(`${API_URL}${accessToken}/search/${heroName}`, config);
+        const heroStuff = response.data.results;
+        req.session.heroA = heroStuff;
+        res.redirect("/versus");
+    } catch (error) {
+        console.log(`Hero A not found`);
+        res.redirect("/versus");
     }
-    res.redirect("/versus");
 });
 
 app.post("/findHeroB", async (req, res) => {
     const heroName = req.body.searchName;
     try {
-        const response = await axios.get(API_URL + accessToken + '/search/' + heroName, config);
-        req.session.detailsB = response.data.results || null;
-    } catch {
-        req.session.detailsB = null;
+        const response = await axios.get(`${API_URL}${accessToken}/search/${heroName}`, config);
+        const heroStuff = response.data.results;
+        req.session.heroB = heroStuff;
+        res.redirect("/versus");
+    } catch (error) {
+        console.log(`Hero B not found`);
+        res.redirect("/versus");
     }
-    res.redirect("/versus");
 });
 
 
