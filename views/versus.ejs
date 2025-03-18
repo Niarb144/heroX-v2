@@ -16,7 +16,9 @@
                     <div class="card__container">
                         <article class="card__article">
                             <%= index + 1 %>
+                            <div class="card-image">
                             <img src="<%= detail.image.url %>" alt="<%= detail.name %>" class="card__img">
+                            </div>
                             <div class="card__data">
                                 <span class="card__description"><%= detail.name %></span>
                                 <h4>'<%= detail.biography['full-name'] %>'</h4>
@@ -62,7 +64,9 @@
                     <div class="card__container">
                         <article class="card__article">
                             <%= index + 1 %>
+                            <div class="card-image">
                             <img src="<%= detail.image.url %>" alt="<%= detail.name %>" class="card__img">
+                            </div>
                             <div class="card__data">
                                 <span class="card__description"><%= detail.name %></span>
                                 <h4>'<%= detail.biography['full-name'] %>'</h4>
@@ -101,7 +105,9 @@
         <% } else { %>
             <div class="card__container">
                 <article class="card__article">
+                    <div class="card-image">
                     <img src="<%= winner.image.url %>" alt="<%= winner.name %>" class="card__img">
+                    </div>
                  </article>
             </div>
             <h2 style="background: #fff; border-radius: 1rem; padding: 4px 8px;">Winner: <%= winner.name %>, <%= winner.biography['full-name'] %></h2>

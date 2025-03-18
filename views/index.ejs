@@ -6,7 +6,9 @@
                 <div class="card__container">
                     <article class="card__article">
                         <%= index + 1%>
+                        <div class="card-image">
                         <img src="<%=detail.image.url%>" alt="<%=detail.name%>" class="card__img">
+                        </div>
                         <div class="card__data">
                             <span class="card__description"><%=detail.name%></span>
                             <h4>'<%=detail.biography['full-name']%>'</h4>
